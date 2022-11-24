@@ -28,8 +28,8 @@
     };
   }
 
-  const animatedClass = 'animate__animated';
-  const serverSide = typeof window === 'undefined';
+  const animatedClass = "animate__animated";
+  const serverSide = typeof window === "undefined";
   let scrollableParentRefInitialValue = undefined;
 
   if (!serverSide) {
@@ -193,7 +193,7 @@
             });
           } else if (currentVis.inViewport && animateIn) {
             animateInTrigger(afterAnimatedIn);
-          } else if (currentVis.onScreen && visibility.inViewport && animateOut && node.current.style.opacity === '1') {
+          } else if (currentVis.onScreen && visibility.inViewport && animateOut && node.current.style.opacity === "1") {
             animateOutTrigger(afterAnimatedOut);
           }
 
@@ -202,7 +202,7 @@
       }
     }, [afterAnimatedIn, afterAnimatedOut, animateIn, animateInTrigger, animateOut, duration, initiallyVisible, visibilityHasChanged, animateOutTrigger, getVisibility]);
     const listener = (0, _react.useMemo)(() => (0, _lodash2.default)(() => {
-      handleScroll();
+      if (node.current) handleScroll();
     }, 50), [handleScroll]);
     (0, _react.useEffect)(() => {
       if (!serverSide) {
@@ -210,7 +210,7 @@
         scrollableParentRef.current = parentSelector ? document.querySelector(parentSelector) : window;
 
         if (scrollableParentRef.current && scrollableParentRef.current.addEventListener) {
-          scrollableParentRef.current.addEventListener('scroll', listener);
+          scrollableParentRef.current.addEventListener("scroll", listener);
         } else {
           console.warn(`Cannot find element by locator: ${scrollableParentSelector}`);
         }
@@ -224,7 +224,7 @@
           clearTimeout(callbackTORef.current);
 
           if (window && window.removeEventListener) {
-            window.removeEventListener('scroll', listener);
+            window.removeEventListener("scroll", listener);
           }
         };
       }
@@ -233,7 +233,7 @@
       ref: node,
       className: classNameProps ? `${classNameProps} ${classes}` : classes,
       style: Object.assign({}, style, styleProps)
-    }, children);
+    }, /*#__PURE__*/_react2.default.createElement("span", null, "Test"));
   };
 });
 //# sourceMappingURL=AnimationOnScroll.js.map

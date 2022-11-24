@@ -1,7 +1,7 @@
-import React, { useMemo, useCallback, useState, useEffect, useRef } from 'react';
-import throttle from 'lodash.throttle';
-const animatedClass = 'animate__animated';
-const serverSide = typeof window === 'undefined';
+import React, { useMemo, useCallback, useState, useEffect, useRef } from "react";
+import throttle from "lodash.throttle";
+const animatedClass = "animate__animated";
+const serverSide = typeof window === "undefined";
 let scrollableParentRefInitialValue = undefined;
 
 if (!serverSide) {
@@ -165,7 +165,7 @@ export const AnimationOnScroll = ({
           });
         } else if (currentVis.inViewport && animateIn) {
           animateInTrigger(afterAnimatedIn);
-        } else if (currentVis.onScreen && visibility.inViewport && animateOut && node.current.style.opacity === '1') {
+        } else if (currentVis.onScreen && visibility.inViewport && animateOut && node.current.style.opacity === "1") {
           animateOutTrigger(afterAnimatedOut);
         }
 
@@ -174,7 +174,7 @@ export const AnimationOnScroll = ({
     }
   }, [afterAnimatedIn, afterAnimatedOut, animateIn, animateInTrigger, animateOut, duration, initiallyVisible, visibilityHasChanged, animateOutTrigger, getVisibility]);
   const listener = useMemo(() => throttle(() => {
-    handleScroll();
+    if (node.current) handleScroll();
   }, 50), [handleScroll]);
   useEffect(() => {
     if (!serverSide) {
@@ -182,7 +182,7 @@ export const AnimationOnScroll = ({
       scrollableParentRef.current = parentSelector ? document.querySelector(parentSelector) : window;
 
       if (scrollableParentRef.current && scrollableParentRef.current.addEventListener) {
-        scrollableParentRef.current.addEventListener('scroll', listener);
+        scrollableParentRef.current.addEventListener("scroll", listener);
       } else {
         console.warn(`Cannot find element by locator: ${scrollableParentSelector}`);
       }
@@ -196,7 +196,7 @@ export const AnimationOnScroll = ({
         clearTimeout(callbackTORef.current);
 
         if (window && window.removeEventListener) {
-          window.removeEventListener('scroll', listener);
+          window.removeEventListener("scroll", listener);
         }
       };
     }
@@ -205,6 +205,6 @@ export const AnimationOnScroll = ({
     ref: node,
     className: classNameProps ? `${classNameProps} ${classes}` : classes,
     style: Object.assign({}, style, styleProps)
-  }, children);
+  }, /*#__PURE__*/React.createElement("span", null, "Test"));
 };
 //# sourceMappingURL=AnimationOnScroll.js.map

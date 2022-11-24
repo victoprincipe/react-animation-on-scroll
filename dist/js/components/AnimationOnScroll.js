@@ -1,6 +1,6 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -13,9 +13,9 @@ var _lodash = _interopRequireDefault(require("lodash.throttle"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -25,12 +25,12 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-var animatedClass = 'animate__animated';
-var serverSide = typeof window === 'undefined';
+var animatedClass = "animate__animated";
+var serverSide = typeof window === "undefined";
 var scrollableParentRefInitialValue = undefined;
 
 if (!serverSide) {
@@ -206,7 +206,7 @@ var AnimationOnScroll = function AnimationOnScroll(_ref) {
           });
         } else if (currentVis.inViewport && animateIn) {
           animateInTrigger(afterAnimatedIn);
-        } else if (currentVis.onScreen && visibility.inViewport && animateOut && node.current.style.opacity === '1') {
+        } else if (currentVis.onScreen && visibility.inViewport && animateOut && node.current.style.opacity === "1") {
           animateOutTrigger(afterAnimatedOut);
         }
 
@@ -216,7 +216,7 @@ var AnimationOnScroll = function AnimationOnScroll(_ref) {
   }, [afterAnimatedIn, afterAnimatedOut, animateIn, animateInTrigger, animateOut, duration, initiallyVisible, visibilityHasChanged, animateOutTrigger, getVisibility]);
   var listener = (0, _react.useMemo)(function () {
     return (0, _lodash.default)(function () {
-      handleScroll();
+      if (node.current) handleScroll();
     }, 50);
   }, [handleScroll]);
   (0, _react.useEffect)(function () {
@@ -225,7 +225,7 @@ var AnimationOnScroll = function AnimationOnScroll(_ref) {
       scrollableParentRef.current = parentSelector ? document.querySelector(parentSelector) : window;
 
       if (scrollableParentRef.current && scrollableParentRef.current.addEventListener) {
-        scrollableParentRef.current.addEventListener('scroll', listener);
+        scrollableParentRef.current.addEventListener("scroll", listener);
       } else {
         console.warn("Cannot find element by locator: ".concat(scrollableParentSelector));
       }
@@ -239,7 +239,7 @@ var AnimationOnScroll = function AnimationOnScroll(_ref) {
         clearTimeout(callbackTORef.current);
 
         if (window && window.removeEventListener) {
-          window.removeEventListener('scroll', listener);
+          window.removeEventListener("scroll", listener);
         }
       };
     }
@@ -248,7 +248,7 @@ var AnimationOnScroll = function AnimationOnScroll(_ref) {
     ref: node,
     className: classNameProps ? "".concat(classNameProps, " ").concat(classes) : classes,
     style: Object.assign({}, style, styleProps)
-  }, children);
+  }, /*#__PURE__*/_react.default.createElement("span", null, "Test"));
 };
 
 exports.AnimationOnScroll = AnimationOnScroll;
