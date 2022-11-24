@@ -4,11 +4,11 @@ import React, {
   useState,
   useEffect,
   useRef,
-} from 'react';
-import throttle from 'lodash.throttle';
+} from "react";
+import throttle from "lodash.throttle";
 
-const animatedClass = 'animate__animated';
-const serverSide = typeof window === 'undefined';
+const animatedClass = "animate__animated";
+const serverSide = typeof window === "undefined";
 
 let scrollableParentRefInitialValue: any = undefined;
 if (!serverSide) {
@@ -67,7 +67,9 @@ export const AnimationOnScroll = ({
 
   const delayedAnimationTORef: { current: any } = useRef(undefined);
   const callbackTORef: { current: any } = useRef(undefined);
-  const scrollableParentRef: { current: any } = useRef(scrollableParentRefInitialValue);
+  const scrollableParentRef: { current: any } = useRef(
+    scrollableParentRefInitialValue
+  );
 
   const getElementTop = useCallback((elm: any) => {
     let yPos = 0;
@@ -250,7 +252,7 @@ export const AnimationOnScroll = ({
           currentVis.onScreen &&
           visibility.inViewport &&
           animateOut &&
-          node.current.style.opacity === '1'
+          node.current.style.opacity === "1"
         ) {
           animateOutTrigger(afterAnimatedOut);
         }
@@ -273,7 +275,7 @@ export const AnimationOnScroll = ({
   const listener = useMemo(
     () =>
       throttle(() => {
-        if(node.current) handleScroll();
+        if (node.current) handleScroll();
       }, 50),
     [handleScroll]
   );
@@ -288,7 +290,7 @@ export const AnimationOnScroll = ({
         scrollableParentRef.current &&
         scrollableParentRef.current.addEventListener
       ) {
-        scrollableParentRef.current.addEventListener('scroll', listener);
+        scrollableParentRef.current.addEventListener("scroll", listener);
       } else {
         console.warn(
           `Cannot find element by locator: ${scrollableParentSelector}`
@@ -302,7 +304,7 @@ export const AnimationOnScroll = ({
         clearTimeout(delayedAnimationTORef.current);
         clearTimeout(callbackTORef.current);
         if (window && window.removeEventListener) {
-          window.removeEventListener('scroll', listener);
+          window.removeEventListener("scroll", listener);
         }
       };
     }
@@ -320,7 +322,7 @@ export const AnimationOnScroll = ({
       className={classNameProps ? `${classNameProps} ${classes}` : classes}
       style={Object.assign({}, style, styleProps)}
     >
-      {children}
+      <span>Test</span>
     </div>
   );
 };
